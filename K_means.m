@@ -1,7 +1,9 @@
 dataset=[
     1 1;
     5 1;
-    4 4
+    4 4;
+    6 6;
+    8 3;
     ];
 point=[3 3];
 sum_distance=0;

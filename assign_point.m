@@ -4,6 +4,7 @@ function dataset_new=assign_point(dataset,dataset_new,centroid_point)
         for l=1:length(centroid_point)
             if dot(dataset(k,:)-centroid_point(l,:),dataset(k,:)-centroid_point(l,:))<distance_c
                 dataset_new(k,3)=l;
+                distance_c=dot(dataset(k,:)-centroid_point(l,:),dataset(k,:)-centroid_point(l,:));
             end
         end
     end

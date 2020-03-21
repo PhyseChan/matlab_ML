@@ -1,0 +1,15 @@
+r=randperm(size(iris,1));
+[row,col]=size(iris);
+dataset=iris(r,:);
+for i=1:row
+    ele=dataset(i,5)
+    if strcmp(ele'Setosa')
+        dataset(i,5)=1;
+    elseif strcmp(dataset(i,5),'Versicolor')
+        dataset(i,5)=2;
+    else
+        dataset(i,5)=3;
+    end
+end
+training_data=dataset(1:row*0.7,:);
+test_data=dataset(row*0.7+1:row,:);

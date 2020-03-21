@@ -1,0 +1,6 @@
+function y=entropy(m)
+    [r,c]=size(m);
+    for i=1:c
+        if m()
+    end
+end

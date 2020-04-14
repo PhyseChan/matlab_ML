@@ -1,0 +1,37 @@
+k=loadMNISTImages('train-images.idx3-ubyte');
+kl=loadMNISTLabels('train-labels.idx1-ubyte');
+dataset=k(:,1000);
+lab=
+dataset=dataset;
+[m n]=size(dataset);
+dataset_new=sum(dataset)/m;
+dataset_max=max(dataset);
+dataset_min=min(dataset);
+X=(dataset(:,1:2)-dataset_new(1:2))./(dataset_max(1:2)-dataset_min(1:2));
+X=[ones(m,1) X]';
+Y=dataset(:,3)';
+theta_1=normrnd(0,1,4,3);
+theta_2=normrnd(0,1,10,3);
+theta_1_temp=zeros(4,3);
+theta_2_temp=zeros(10,3);
+alpha=0.5;
+% there is no bias.
+for iter=1:40000
+    z2=theta_1*X;
+    a2=sigmoid(z2);
+    [m2 n2]=size(a2);
+    z3=theta_2*a2;
+    a3=sigmoid(z3);
+    
+    partial_theta_2=(a3-Y).*a3.*(1-a3)*a2';
+    partial_a2=theta_2'*(a3-Y).*a3.*(1-a3);
+    partial_a2_raw=partial_a2;
+    partial_theta_1=a2.*(1-a2).*partial_a2_raw*X';
+    
+    theta_2=theta_2-partial_theta_2*alpha/m;
+    theta_1=theta_1-partial_theta_1*alpha/m;
+    if mod(iter,3000)==0
+        disp(theta_2);
+    end
+    plot(iter/1000,(a3-Y)*(a3-Y)'/m,'.k');
+end
